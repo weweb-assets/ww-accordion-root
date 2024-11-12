@@ -1,15 +1,12 @@
 <template>
-    <div
-        :style="{
-            '--transition-duration': animationDurationValue + 'ms',
-            '--transition-easing': animationEasing,
-        }"
-        class="ww-accordion-root"
-        @keydown.esc="onEscapeKeyDown()"
-    ></div>
+    <div class="ww-accordion-root">
+        <wwLayout path="contentLayout" class="ww-accordion-root-layout" />
+    </div>
 </template>
 
 <script>
+import { computed, provide, ref } from 'vue';
+
 export default {
     props: {
         content: { type: Object, required: true },
@@ -18,9 +15,77 @@ export default {
         wwEditorState: { type: Object, required: true },
         /* wwEditor:end */
     },
-    emits: [],
-    setup() {},
+    emits: ['trigger-event'],
+    setup(props, { emit }) {
+        const orientation = ref(() => props.content.orientation);
+        const defaultValue = ref(() => props.content.defaultValue);
+        const type = ref(() => props.content.type);
+
+        const { value: componentValue, setValue: setComponentValue } = wwLib.wwVariable.useComponentVariable({
+            uid: props.uid,
+            name: 'value',
+            type: 'text',
+            defaultValue: props.content.defaultValue || null,
+            componentType: 'element',
+        });
+        const value = computed({
+            get: () => componentValue.value,
+            set: value => {
+                setComponentValue(value);
+                emit('trigger-event', { name: 'change', event: { value } });
+            },
+        });
+
+        provide('weweb-assets/ww-accordion-root', { value });
+
+        function toggleAccordion(toggleValue) {
+            value.value = value.value === toggleValue ? null : toggleValue;
+        }
+
+        function openAccordion(openValue) {
+            value.value = openValue;
+        }
+
+        function closeAccordion() {
+            value.value = null;
+        }
+
+        wwLib.wwElement.useRegisterElementLocalContext('ww-accordion-root', ref({ value }), {
+            toggleAccordion: {
+                method: toggleAccordion,
+                editor: {
+                    label: 'Toggle accordion',
+                    action: 'toggleAccordion',
+                },
+            },
+            openAccordion: {
+                method: openAccordion,
+                editor: {
+                    label: 'Open accordion',
+                    action: 'openAccordion',
+                },
+            },
+            closeAccordion: {
+                method: closeAccordion,
+                editor: {
+                    label: 'Close accordion',
+                    action: 'closeAccordion',
+                },
+            },
+        });
+
+        return {
+            type,
+            defaultValue,
+            orientation,
+        };
+    },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.ww-accordion-root-layout {
+    display: flex;
+    flex-direction: column;
+}
+</style>

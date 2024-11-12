@@ -2,7 +2,7 @@
     "name": "ww-accordion-root",
     "repository": {
         "type": "git",
-        "url": "https://github.com/weweb-assets/ww-dialog-root"
+        "url": "https://github.com/weweb-assets/ww-accordion-root"
     },
     "version": "3.2.0",
     "license": "MIT",
