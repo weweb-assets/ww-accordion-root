@@ -1,6 +1,6 @@
 <template>
-    <div class="ww-accordion-root">
-        <wwLayout path="contentLayout" class="ww-accordion-root-layout" />
+    <div>
+        <wwLayout path="contentLayout"/>
     </div>
 </template>
 
@@ -25,7 +25,7 @@ export default {
             uid: props.uid,
             name: 'value',
             type: 'text',
-            defaultValue: props.content.defaultValue || (props.content.type === 'multi' ? [] : null),
+            defaultValue: props.content.defaultValue || null,
             componentType: 'element',
         });
         const value = computed({
@@ -39,36 +39,15 @@ export default {
         provide('weweb-assets/ww-accordion-root', { value });
 
         function toggleAccordion(toggleValue) {
-            if (type.value === 'multi') {
-                const values = Array.isArray(value.value) ? value.value : [];
-                const index = values.indexOf(toggleValue);
-                value.value = index === -1 ? [...values, toggleValue] : values.filter(v => v !== toggleValue);
-            } else {
-                value.value = value.value === toggleValue ? null : toggleValue;
-            }
+            value.value = value.value === toggleValue ? null : toggleValue;
         }
 
         function openAccordion(openValue) {
-            if (type.value === 'multi') {
-                const values = Array.isArray(value.value) ? value.value : [];
-                if (!values.includes(openValue)) {
-                    value.value = [...values, openValue];
-                }
-            } else {
-                value.value = openValue;
-            }
+            value.value = openValue;
         }
 
-        function closeAccordion(closeValue) {
-            if (type.value === 'multi') {
-                if (closeValue) {
-                    value.value = Array.isArray(value.value) ? value.value.filter(v => v !== closeValue) : [];
-                } else {
-                    value.value = [];
-                }
-            } else {
-                value.value = null;
-            }
+        function closeAccordion() {
+            value.value = null;
         }
 
         wwLib.wwElement.useRegisterElementLocalContext('ww-accordion-root', ref({ value }), {
@@ -103,10 +82,3 @@ export default {
     },
 };
 </script>
-
-<style lang="scss" scoped>
-.ww-accordion-root-layout {
-    display: flex;
-    flex-direction: column;
-}
-</style>
