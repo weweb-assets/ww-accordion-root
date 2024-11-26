@@ -25,7 +25,7 @@ export default {
             uid: props.uid,
             name: 'value',
             type: 'text',
-            defaultValue: props.content.defaultValue || null,
+            defaultValue: props.content.defaultValue || (props.content.type === 'multi' ? [] : null),
             componentType: 'element',
         });
         const value = computed({
