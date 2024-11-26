@@ -1,7 +1,5 @@
 <template>
-    <div>
-        <wwLayout path="contentLayout" />
-    </div>
+    <wwLayout path="contentLayout" />
 </template>
 
 <script>
