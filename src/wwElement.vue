@@ -1,6 +1,6 @@
 <template>
-    <div class="ww-accordion-root">
-        <wwLayout path="contentLayout" class="ww-accordion-root-layout" />
+    <div>
+        <wwLayout path="contentLayout" />
     </div>
 </template>
 
@@ -25,7 +25,7 @@ export default {
             uid: props.uid,
             name: 'value',
             type: 'text',
-            defaultValue: props.content.defaultValue || (props.content.type === 'multi' ? [] : null),
+            defaultValue: props.content.defaultValue || null,
             componentType: 'element',
         });
         const value = computed({
@@ -123,10 +123,3 @@ export default {
     },
 };
 </script>
-
-<style lang="scss" scoped>
-.ww-accordion-root-layout {
-    display: flex;
-    flex-direction: column;
-}
-</style>
