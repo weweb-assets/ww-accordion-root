@@ -41,6 +41,31 @@ export default {
         },
     ],
     properties: {
+        contentLayout: {
+            label: {
+                en: 'Items',
+                fr: 'Items',
+            },
+            type: 'Info',
+            options: {
+                text: { en: 'Elements to repeat' },
+            },
+            bindable: 'repeatable',
+            defaultValue: [],
+            /* wwEditor:start */
+            bindingValidation: {
+                validations: [
+                    {
+                        type: 'array',
+                    },
+                    {
+                        type: 'object',
+                    },
+                ],
+                tooltip:
+                    'A collection or an array of data: \n\n`myCollection` or `[{}, {}, ...] || ["string1", "string2", ...] || [1, 2, ...]`',
+            },
+        },
         type: {
             label: {
                 en: 'Type',
@@ -88,31 +113,6 @@ export default {
             defaultValue: 'vertical',
             bindable: true,
         },
-        contentLayout: {
-            label: {
-                en: 'Items',
-                fr: 'Items',
-            },
-            type: 'Repeat',
-            options: {
-                text: { en: 'Elements to repeat' },
-            },
-            hidden: (content, sidePanelContent, boundProps, wwProps) => !!(wwProps && wwProps.isFixed),
-            bindable: 'repeatable',
-            defaultValue: [],
-            /* wwEditor:start */
-            bindingValidation: {
-                validations: [
-                    {
-                        type: 'array',
-                    },
-                    {
-                        type: 'object',
-                    },
-                ],
-                tooltip:
-                    'A collection or an array of data: \n\n`myCollection` or `[{}, {}, ...] || ["string1", "string2", ...] || [1, 2, ...]`',
-            },
-        },
+       
     },
 };
