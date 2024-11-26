@@ -1,6 +1,6 @@
 <template>
     <div>
-        <wwLayout :v-bind="$attrs" path="contentLayout"/>
+        <wwLayout path="contentLayout"/>
     </div>
 </template>
 
@@ -8,7 +8,6 @@
 import { computed, provide, ref } from 'vue';
 
 export default {
-    inheritAttrs: false,
     props: {
         content: { type: Object, required: true },
         uid: { type: String, required: true },
