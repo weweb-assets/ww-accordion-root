@@ -25,7 +25,7 @@ export default {
             uid: props.uid,
             name: 'value',
             type: 'text',
-            defaultValue: props.content.defaultValue || null,
+            defaultValue: props.content.defaultValue || (props.content.type === 'multi' ? [] : null),
             componentType: 'element',
         });
         const value = computed({
@@ -39,15 +39,36 @@ export default {
         provide('weweb-assets/ww-accordion-root', { value });
 
         function toggleAccordion(toggleValue) {
-            value.value = value.value === toggleValue ? null : toggleValue;
+            if (type.value === 'multi') {
+                const values = Array.isArray(value.value) ? value.value : [];
+                const index = values.indexOf(toggleValue);
+                value.value = index === -1 ? [...values, toggleValue] : values.filter(v => v !== toggleValue);
+            } else {
+                value.value = value.value === toggleValue ? null : toggleValue;
+            }
         }
 
         function openAccordion(openValue) {
-            value.value = openValue;
+            if (type.value === 'multi') {
+                const values = Array.isArray(value.value) ? value.value : [];
+                if (!values.includes(openValue)) {
+                    value.value = [...values, openValue];
+                }
+            } else {
+                value.value = openValue;
+            }
         }
 
-        function closeAccordion() {
-            value.value = null;
+        function closeAccordion(closeValue) {
+            if (type.value === 'multi') {
+                if (closeValue) {
+                    value.value = Array.isArray(value.value) ? value.value.filter(v => v !== closeValue) : [];
+                } else {
+                    value.value = [];
+                }
+            } else {
+                value.value = null;
+            }
         }
 
         wwLib.wwElement.useRegisterElementLocalContext('ww-accordion-root', ref({ value }), {

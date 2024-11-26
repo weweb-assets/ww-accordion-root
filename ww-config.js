@@ -1,8 +1,8 @@
 export default {
-    inherit: 'ww-text',
+    inherit: 'ww-layout',
     options: {
         autoByContent: true,
-        displayAllowedValues: ['flex', 'inline-flex'],
+        displayAllowedValues: ['flex', 'inline-flex', 'grid'],
         linkable: true,
     },
     editor: {
@@ -11,12 +11,7 @@ export default {
             fr: 'Accordéon',
         },
         icon: 'cursor-click',
-        infoTags: () => {
-            return [];
-        },
-        workflowHint: () => {
-            return false;
-        },
+       
     },
     states: ['focus', 'disabled'],
     triggerEvents: [
@@ -60,6 +55,7 @@ export default {
                 ],
             },
             defaultValue: 'single',
+            bindable: true,
         },
 
         defaultValue: {
@@ -73,6 +69,7 @@ export default {
                 en: 'The default value of the accordion',
                 fr: "La valeur par défaut de l'accordéon",
             },
+            bindable: true,
         },
 
         orientation: {
@@ -89,6 +86,7 @@ export default {
                 ],
             },
             defaultValue: 'vertical',
+            bindable: true,
         },
 
         contentLayout: {
