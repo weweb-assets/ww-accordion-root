@@ -39,15 +39,56 @@ export default {
         provide('weweb-assets/ww-accordion-root', { value });
 
         function toggleAccordion(toggleValue) {
-            value.value = value.value === toggleValue ? null : toggleValue;
+            if (type.value === 'single') {
+                const currentValue = value.value;
+                if (Array.isArray(currentValue)) {
+                    value.value = currentValue[0];
+                    return;
+                }
+
+                value.value = value.value === toggleValue ? null : toggleValue;
+                return;
+            }
+
+            if (!Array.isArray(value.value)) {
+                value.value = value.value ? [value.value] : [];
+            }
+
+            if (value.value.includes(toggleValue)) {
+                value.value = value.value.filter(v => v !== toggleValue);
+            } else {
+                value.value.push(toggleValue);
+            }
         }
 
         function openAccordion(openValue) {
-            value.value = openValue;
+            if (type.value === 'single') {
+                value.value = openValue;
+                return;
+            }
+
+            if (!Array.isArray(value.value)) {
+                value.value = value.value ? [value.value] : [];
+            }
+
+            if (!value.value.includes(openValue)) {
+                value.value.push(openValue);
+            }
         }
 
-        function closeAccordion() {
-            value.value = null;
+        function closeAccordion(accordionValue) {
+            if (type.value === 'single') {
+                value.value = null;
+                return;
+            }
+
+            if (!Array.isArray(value.value)) {
+                value.value = value.value ? [value.value] : [];
+            }
+
+            if (value.value.includes(accordionValue)) {
+                value.value = value.value.filter(v => v !== accordionValue);
+            }
         }
 
         wwLib.wwElement.useRegisterElementLocalContext('ww-accordion-root', ref({ value }), {
