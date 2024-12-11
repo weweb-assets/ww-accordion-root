@@ -86,6 +86,7 @@ export default {
         wwLib.wwElement.useRegisterElementLocalContext('ww-accordion-root', ref({ value }), {
             toggleAccordion: {
                 method: toggleAccordion,
+                /* wwEditor:start */
                 editor: {
                     label: 'Toggle accordion',
                     group: 'Accordion',
@@ -99,6 +100,7 @@ export default {
                         },
                     ],
                 },
+                /* wwEditor:end */
             },
             openAccordion: {
                 method: openAccordion,
@@ -115,9 +117,11 @@ export default {
                         },
                     ],
                 },
+                /* wwEditor:end */
             },
             closeAccordion: {
                 method: closeAccordion,
+                /* wwEditor:start */
                 editor: {
                     label: 'Close accordion',
                     group: 'Accordion',
@@ -131,9 +135,11 @@ export default {
                         },
                     ],
                 },
+                /* wwEditor:end */
             },
             setAccordionValue: {
                 method: setAccordionValue,
+                /* wwEditor:start */
                 editor: {
                     label: 'Set accordion value',
                     group: 'Accordion',
@@ -147,6 +153,7 @@ export default {
                         },
                     ],
                 },
+                /* wwEditor:end */
             },
         });
 
