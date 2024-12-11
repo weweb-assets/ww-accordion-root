@@ -35,6 +35,13 @@ export default {
             },
         });
 
+        watch(
+            () => type.value,
+            newType => {
+                setComponentValue(newType === 'single' ? '' : []);
+            }
+        );
+
         provide('weweb-assets/ww-accordion-root', { value });
 
         function toggleAccordion(toggleValue) {
