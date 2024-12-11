@@ -36,7 +36,7 @@ export default {
         });
 
         watch(
-            () => type.value,
+            () => props.content.type,
             newType => {
                 console.log('newType', newType);
                 setComponentValue(newType === 'single' ? '' : []);
