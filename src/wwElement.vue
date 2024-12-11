@@ -17,7 +17,7 @@ export default {
     setup(props, { emit }) {
         const orientation = ref(() => props.content.orientation);
         const defaultValue = ref(() => props.content.defaultValue);
-        const type = ref(() => props.content.type);
+        const type = computed(() => props.content.type);
 
         const { value: componentValue, setValue: setComponentValue } = wwLib.wwVariable.useComponentVariable({
             uid: props.uid,
