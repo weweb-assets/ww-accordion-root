@@ -22,7 +22,7 @@ export default {
         const { value: componentValue, setValue: setComponentValue } = wwLib.wwVariable.useComponentVariable({
             uid: props.uid,
             name: 'value',
-            type: type.value === 'single' ? 'text' : 'array',
+            type: 'any',
             defaultValue: props.content.defaultValue || null,
             componentType: 'element',
         });
