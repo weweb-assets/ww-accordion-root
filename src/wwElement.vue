@@ -39,13 +39,13 @@ export default {
             () => props.content.type,
             newType => {
                 console.log('newType', newType);
-                setComponentValue(newType === 'single' ? '' : []);
+                setComponentValue(newType === 'single' ? null : []);
             }
         );
 
         function toggleAccordion(toggleValue) {
             if (type.value === 'multiple') {
-                const currentValues = new Set(value.value);
+                const currentValues = new Set(Array.isArray(value.value) ? value.value : []);
                 currentValues.has(toggleValue) ? currentValues.delete(toggleValue) : currentValues.add(toggleValue);
                 value.value = Array.from(currentValues);
             } else {
