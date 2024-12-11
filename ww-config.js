@@ -11,7 +11,6 @@ export default {
             fr: 'Accordéon',
         },
         icon: 'cursor-click',
-       
     },
     states: ['focus', 'disabled'],
     triggerEvents: [
@@ -30,14 +29,54 @@ export default {
         {
             label: 'Toggle accordion',
             action: 'toggleAccordion',
+            description: 'Toggle the accordion',
+            icon: 'chevron-bottom',
+            args: [
+                {
+                    name: 'Value',
+                    type: 'any',
+                    required: true,
+                },
+            ],
         },
         {
             label: 'Open accordion',
             action: 'openAccordion',
+            description: 'Open the accordion',
+            icon: 'chevron-bottom',
+            args: [
+                {
+                    name: 'Value',
+                    type: 'any',
+                    required: true,
+                },
+            ],
         },
         {
             label: 'Close accordion',
             action: 'closeAccordion',
+            description: 'Close the accordion',
+            icon: 'chevron-bottom',
+            args: [
+                {
+                    name: 'Value',
+                    type: 'any',
+                    required: true,
+                },
+            ],
+        },
+        {
+            label: 'Set accordion value',
+            action: 'setAccordionValue',
+            description: 'Set the value of the accordion',
+            icon: 'chevron-bottom',
+            args: [
+                {
+                    name: 'Value',
+                    type: 'any',
+                    required: true,
+                },
+            ],
         },
     ],
     properties: {
@@ -113,6 +152,5 @@ export default {
             defaultValue: 'vertical',
             bindable: true,
         },
-       
     },
 };
