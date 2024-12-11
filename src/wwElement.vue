@@ -43,8 +43,6 @@ export default {
             }
         );
 
-        provide('weweb-assets/ww-accordion-root', { value });
-
         function toggleAccordion(toggleValue) {
             if (type.value === 'multiple') {
                 const currentValues = new Set(value.value);
@@ -76,6 +74,14 @@ export default {
         function setAccordionValue(setAccordionValue) {
             value.value = setAccordionValue;
         }
+
+        provide('weweb-assets/ww-accordion-root', {
+            value,
+            toggleAccordion,
+            openAccordion,
+            closeAccordion,
+            setAccordionValue,
+        });
 
         wwLib.wwElement.useRegisterElementLocalContext('ww-accordion-root', ref({ value }), {
             toggleAccordion: {
