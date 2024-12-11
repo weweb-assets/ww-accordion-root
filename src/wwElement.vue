@@ -38,6 +38,7 @@ export default {
         watch(
             () => type.value,
             newType => {
+                console.log('newType', newType);
                 setComponentValue(newType === 'single' ? '' : []);
             }
         );
